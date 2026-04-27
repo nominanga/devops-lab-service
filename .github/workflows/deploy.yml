@@ -1,0 +1,22 @@
+name: CI/CD
+
+on:
+  push: 
+    branches: ["master"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy to SSH remote
+        uses: appleboy/ssh-action@v1.0.3
+        with: 
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/devops-lab-service
+            git pull
+            docker compose up -d --build
+    
+  
