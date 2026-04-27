@@ -15,7 +15,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd ~/devops-lab-service
+            cd ~/devops-lab-service/docker
             git pull
             docker compose up -d --build
     
