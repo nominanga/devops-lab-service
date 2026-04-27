@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file docker/Dockerfile -t devops-lab
+    - name: Test Container
+      run: |
+        docker run -d -p 8000:8000 devops-lab 
+        sleep 5 
+        curl localhost:8000
+        docker stop $(docker ps -q)
+
