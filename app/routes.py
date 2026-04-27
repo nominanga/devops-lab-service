@@ -10,7 +10,7 @@ task_id = 0
 
 @router.get("/")
 def root():
-    return {"message": "Service is running"}
+    return {"message": "Update ping message: testing CI/CD"}
 
 
 @router.post("/tasks")
